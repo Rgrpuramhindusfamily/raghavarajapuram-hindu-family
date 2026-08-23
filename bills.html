@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Bills</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/data.js"></script>
+
+</head>
+
+<body>
+
+<header>
+    🙏 రాఘవరాజపురం హిందూ కుటుంబం 🙏
+</header>
+
+
+<nav>
+
+    <a href="index.html">Home</a>
+    <a href="families.html">Families</a>
+    <a href="year.html">Year</a>
+    <a href="festivals.html">Festivals</a>
+    <a href="photos.html">Photos</a>
+    <a href="videos.html">Videos</a>
+    <a href="donations.html">Donations</a>
+    <a href="bills.html">Bills</a>
+
+</nav>
+
+
+<main>
+
+    <h1 class="page-title">
+        Bills
+    </h1>
+
+
+    <div class="filter-box">
+
+        <label>
+            Select Year
+        </label>
+
+        <select id="billYear">
+
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+
+        </select>
+
+    </div>
+
+
+    <div id="billResults"
+         class="results">
+
+    </div>
+
+</main>
+
+
+<script>
+
+const year =
+    document.getElementById("billYear");
+
+const results =
+    document.getElementById("billResults");
+
+
+function showBills() {
+
+    const data =
+        yearData[year.value];
+
+
+    if (data.bills.length === 0) {
+
+        results.innerHTML =
+            "<p>No bills recorded.</p>";
+
+        return;
+
+    }
+
+
+    results.innerHTML = `
+
+        <h2>${year.value} Bills</h2>
+
+        <ul class="result-list">
+
+            ${data.bills
+                .map(item => `<li>${item}</li>`)
+                .join("")}
+
+        </ul>
+
+    `;
+
+}
+
+
+year.addEventListener(
+    "change",
+    showBills
+);
+
+
+showBills();
+
+</script>
+
+
+</body>
+
+</html>
