@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Donations</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/data.js"></script>
+
+</head>
+
+<body>
+
+<header>
+    🙏 రాఘవరాజపురం హిందూ కుటుంబం 🙏
+</header>
+
+
+<nav>
+
+    <a href="index.html">Home</a>
+    <a href="families.html">Families</a>
+    <a href="year.html">Year</a>
+    <a href="festivals.html">Festivals</a>
+    <a href="photos.html">Photos</a>
+    <a href="videos.html">Videos</a>
+    <a href="donations.html">Donations</a>
+    <a href="bills.html">Bills</a>
+
+</nav>
+
+
+<main>
+
+    <h1 class="page-title">
+        Donations
+    </h1>
+
+
+    <div class="filter-box">
+
+        <label>
+            Select Year
+        </label>
+
+        <select id="donationYear">
+
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+
+        </select>
+
+    </div>
+
+
+    <div id="donationResults"
+         class="results">
+
+    </div>
+
+</main>
+
+
+<script>
+
+const year =
+    document.getElementById("donationYear");
+
+const results =
+    document.getElementById("donationResults");
+
+
+function showDonations() {
+
+    const data =
+        yearData[year.value];
+
+
+    if (data.donations.length === 0) {
+
+        results.innerHTML =
+            "<p>No donations recorded.</p>";
+
+        return;
+
+    }
+
+
+    results.innerHTML = `
+
+        <h2>${year.value} Donations</h2>
+
+        <ul class="result-list">
+
+            ${data.donations
+                .map(item => `<li>${item}</li>`)
+                .join("")}
+
+        </ul>
+
+    `;
+
+}
+
+
+year.addEventListener(
+    "change",
+    showDonations
+);
+
+
+showDonations();
+
+</script>
+
+
+</body>
+
+</html>
