@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Family Photos</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/data.js"></script>
+
+</head>
+
+<body>
+
+<header>
+    🙏 రాఘవరాజపురం హిందూ కుటుంబం 🙏
+</header>
+
+
+<nav>
+
+    <a href="index.html">Home</a>
+
+    <a href="families.html">Families</a>
+
+    <a href="year.html">Year</a>
+
+    <a href="festivals.html">Festivals</a>
+
+    <a href="photos.html">Photos</a>
+
+    <a href="videos.html">Videos</a>
+
+    <a href="donations.html">Donations</a>
+
+    <a href="bills.html">Bills</a>
+
+</nav>
+
+
+<main>
+
+    <h1 id="familyTitle"
+        class="page-title">
+        Family Photos
+    </h1>
+
+    <div id="gallery"
+         class="photo_container">
+    </div>
+
+</main>
+
+
+<script>
+
+const params =
+    new URLSearchParams(window.location.search);
+
+const familyId =
+    params.get("family");
+
+
+const family =
+    families.find(item => item.id === familyId);
+
+
+const title =
+    document.getElementById("familyTitle");
+
+
+const gallery =
+    document.getElementById("gallery");
+
+
+if (!family) {
+
+    title.innerText = "Family not found";
+
+}
+else {
+
+    title.innerText =
+        family.name + " Photos";
+
+
+    /*
+       Add your actual photos here.
+
+       Example:
+
+       families/family01/photo1.jpg
+       families/family01/photo2.jpg
+    */
+
+
+    const photos = [
+        `families/${family.id}/photo1.jpg`,
+        `families/${family.id}/photo2.jpg`,
+        `families/${family.id}/photo3.jpg`,
+        `families/${family.id}/photo4.jpg`,
+        `families/${family.id}/photo5.jpg`
+    ];
+
+
+    photos.forEach((photo, index) => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "photo-card";
+
+
+        const img =
+            document.createElement("img");
+
+        img.src = photo;
+
+        img.alt = family.name + " photo";
+
+
+        img.onerror = function () {
+
+            this.style.display = "none";
+
+            const error =
+                document.createElement("div");
+
+            error.className = "image-error";
+
+            error.innerText =
+                "Photo not uploaded";
+
+            this.parentElement.prepend(error);
+
+        };
+
+
+        card.appendChild(img);
+
+
+        const name =
+            document.createElement("p");
+
+        name.innerText =
+            "Photo " + (index + 1);
+
+
+        card.appendChild(name);
+
+
+        gallery.appendChild(card);
+
+    });
+
+}
+
+</script>
+
+
+</body>
+
+</html>
