@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Year</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/data.js"></script>
+
+</head>
+
+<body>
+
+<header>
+    🙏 రాఘవరాజపురం హిందూ కుటుంబం 🙏
+</header>
+
+
+<nav>
+
+    <a href="index.html">Home</a>
+
+    <a href="families.html">Families</a>
+
+    <a href="year.html">Year</a>
+
+    <a href="festivals.html">Festivals</a>
+
+    <a href="photos.html">Photos</a>
+
+    <a href="videos.html">Videos</a>
+
+    <a href="donations.html">Donations</a>
+
+    <a href="bills.html">Bills</a>
+
+</nav>
+
+
+<main>
+
+    <h1 class="page-title">
+        Year Wise Information
+    </h1>
+
+
+    <div class="filter-box">
+
+
+        <!-- YEAR -->
+
+        <div class="filter-row">
+
+            <label>
+                Select Year
+            </label>
+
+            <select id="year">
+
+                <option value="">
+                    Select Year
+                </option>
+
+                <option value="2025">2025</option>
+
+                <option value="2026">2026</option>
+
+                <option value="2027">2027</option>
+
+                <option value="2028">2028</option>
+
+                <option value="2029">2029</option>
+
+                <option value="2030">2030</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- FESTIVAL -->
+
+        <div class="filter-row">
+
+            <label>
+                Select Festival
+            </label>
+
+            <select id="festival">
+
+                <option value="">
+                    Select Festival
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- PHOTOS -->
+
+        <div class="filter-row">
+
+            <label>
+                Select Photos
+            </label>
+
+            <select id="photos">
+
+                <option value="">
+                    Select Photos
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- DONATIONS -->
+
+        <div class="filter-row">
+
+            <label>
+                Select Donations
+            </label>
+
+            <select id="donations">
+
+                <option value="">
+                    Select Donations
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- BILLS -->
+
+        <div class="filter-row">
+
+            <label>
+                Select Bills
+            </label>
+
+            <select id="bills">
+
+                <option value="">
+                    Select Bills
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- ENTER -->
+
+        <button
+            class="enter-button"
+            onclick="showResults()">
+
+            ENTER
+
+        </button>
+
+    </div>
+
+
+    <div id="results"
+         class="results"
+         style="display:none;">
+
+    </div>
+
+</main>
+
+
+<script>
+
+
+const yearSelect =
+    document.getElementById("year");
+
+const festivalSelect =
+    document.getElementById("festival");
+
+const photoSelect =
+    document.getElementById("photos");
+
+const donationSelect =
+    document.getElementById("donations");
+
+const billSelect =
+    document.getElementById("bills");
+
+
+yearSelect.addEventListener(
+    "change",
+    loadYear
+);
+
+
+function clearSelect(select, text) {
+
+    select.innerHTML =
+        `<option value="">${text}</option>`;
+
+}
+
+
+function addOptions(select, items) {
+
+    items.forEach(item => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = item;
+
+        option.textContent = item;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+function loadYear() {
+
+    const year =
+        yearSelect.value;
+
+
+    clearSelect(
+        festivalSelect,
+        "Select Festival"
+    );
+
+    clearSelect(
+        photoSelect,
+        "Select Photos"
+    );
+
+    clearSelect(
+        donationSelect,
+        "Select Donations"
+    );
+
+    clearSelect(
+        billSelect,
+        "Select Bills"
+    );
+
+
+    if (!year) {
+        return;
+    }
+
+
+    const data =
+        yearData[year];
+
+
+    addOptions(
+        festivalSelect,
+        data.festivals
+    );
+
+
+    addOptions(
+        photoSelect,
+        data.photos
+    );
+
+
+    if (data.donations.length > 0) {
+
+        addOptions(
+            donationSelect,
+            data.donations
+        );
+
+    }
+    else {
+
+        addOptions(
+            donationSelect,
+            ["No donations available"]
+        );
+
+    }
+
+
+    if (data.bills.length > 0) {
+
+        addOptions(
+            billSelect,
+            data.bills
+        );
+
+    }
+    else {
+
+        addOptions(
+            billSelect,
+            ["No bills available"]
+        );
+
+    }
+
+}
+
+
+function showResults() {
+
+    const year =
+        yearSelect.value;
+
+
+    if (!year) {
+
+        alert("Please select a year.");
+
+        return;
+
+    }
+
+
+    const results =
+        document.getElementById("results");
+
+
+    results.style.display =
+        "block";
+
+
+    results.innerHTML = `
+
+        <h2>
+            ${year} Results
+        </h2>
+
+        <p>
+            <strong>Festival:</strong>
+            ${festivalSelect.value || "Not selected"}
+        </p>
+
+        <p>
+            <strong>Photos:</strong>
+            ${photoSelect.value || "Not selected"}
+        </p>
+
+        <p>
+            <strong>Donations:</strong>
+            ${donationSelect.value || "Not selected"}
+        </p>
+
+        <p>
+            <strong>Bills:</strong>
+            ${billSelect.value || "Not selected"}
+        </p>
+
+    `;
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
