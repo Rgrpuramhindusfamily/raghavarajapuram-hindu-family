@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Families</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/data.js"></script>
+
+</head>
+
+<body>
+
+<header>
+    🙏 రాఘవరాజపురం హిందూ కుటుంబం 🙏
+</header>
+
+
+<nav>
+
+    <a href="index.html">Home</a>
+
+    <a href="families.html">Families</a>
+
+    <a href="year.html">Year</a>
+
+    <a href="festivals.html">Festivals</a>
+
+    <a href="photos.html">Photos</a>
+
+    <a href="videos.html">Videos</a>
+
+    <a href="donations.html">Donations</a>
+
+    <a href="bills.html">Bills</a>
+
+</nav>
+
+
+<main>
+
+    <h1 class="page-title">
+        Our Families
+    </h1>
+
+    <div id="familyGrid" class="family-grid"></div>
+
+</main>
+
+
+<script>
+
+const grid = document.getElementById("familyGrid");
+
+
+families.forEach(family => {
+
+    const card = document.createElement("div");
+
+    card.className = "family-card";
+
+    card.innerHTML = `
+        <a href="family.html?family=${family.id}">
+            <h3>${family.name}</h3>
+        </a>
+    `;
+
+    grid.appendChild(card);
+
+});
+
+</script>
+
+
+</body>
+
+</html>
